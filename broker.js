@@ -1,6 +1,6 @@
 // MQTT broker
 var mosca = require('mosca')
-var exec = require('exec')
+var exec = require('os').exec
 var settings = {url:"192.168.0.168",port: 1883}
 var broker = new mosca.Server(settings)
 
