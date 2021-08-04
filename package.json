@@ -1,0 +1,22 @@
+{
+  "name": "charger",
+  "version": "1.0.0",
+  "description": "charger mqtt",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/alexprasetia/charger.git"
+  },
+  "keywords": [
+    "charger"
+  ],
+  "author": "alexprasetia",
+  "license": "ISC",
+  "dependencies": {
+    "jsonschema": "^1.2.6",
+    "mosca": "^2.8.3"
+  }
+}
