@@ -24,8 +24,8 @@ if (typeof (process.argv.slice(2)[0])!='undefined'){
 
 client.on('connect', ()=>{
     setInterval(()=>{
-        console.log(battery_level)
         battery_level=Number(fs.readFileSync('/sys/class/power_supply/battery/capacity','utf-8'))
+        console.log(battery_level)
         if (battery_level>=battery_target){
             client.publish(topic,0)
             process.exit()
