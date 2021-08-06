@@ -1,6 +1,6 @@
 var mosca = require('mosca')
 var exec = require('child_process').exec
-var url = require("ip");
+var url = require("ip").address();
 if (process.platform =='win32'||process.platform=='win64'){
     var command_shutdown= 'shutdown /s' 
 }
