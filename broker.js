@@ -1,12 +1,11 @@
 var mosca = require('mosca')
 var exec = require('child_process').exec
+var url = require("ip");
 if (process.platform =='win32'||process.platform=='win64'){
-    command_shutdown= 'shutdown /s' 
-    var url = require('os').networkInterfaces().Ethernet.filter(s=>s.family=='IPv4').map(s=>s.address)[0]
+    var command_shutdown= 'shutdown /s' 
 }
 else{ 
-    command_shutdown= 'shutdown +2' 
-    var url = require('os').networkInterfaces().enp2s0.filter(s=>s.family=='IPv4').map(s=>s.address)[0]
+    var command_shutdown= 'shutdown +2' 
 }
 // var port = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000)
 var port = 2930
