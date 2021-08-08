@@ -1,15 +1,15 @@
-var fs = require('fs')
+var exec =require('child_process').exec
 var mqtt = require('mqtt')
-, host = require('os').networkInterfaces().Ethernet.filter(s=>s.family=='IPv4').map(s=>s.address)[0]
+, host = 'your_ip'
 , port = '2930';
 
 var settings = {
 keepalive: 1000,
 protocolId: 'MQIsdp',
 protocolVersion: 3,
-clientId: 'charger_mqtt',
-username:'smartphone',
-password: 'password_12345'
+clientId: 'clientid',
+username:'username',
+password: 'password'
 };
 
 // client connection
@@ -24,12 +24,12 @@ if (typeof (process.argv.slice(2)[0])!='undefined'){
 
 client.on('connect', ()=>{
     setInterval(()=>{
-        battery_level=Number(fs.readFileSync('/sys/class/power_supply/battery/capacity','utf-8'))
-        console.log(battery_level)
+        exec('termux-battery-status',(err,out,der)=>battery_level=Number(JSON.parse(out).percentage))
         if (battery_level>=battery_target){
             client.publish(topic,0)
             process.exit()
         }
         // battery_level+=20
-    }, 60000)
+        console.log(battery_level)
+    }, 5000)
 })

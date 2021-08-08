@@ -12,7 +12,7 @@ var port = 2930
 var settings = {url:url,port: port}
 var broker = new mosca.Server(settings)
 
-broker.authenticate('redmik20pro','alexprasetia','redmik20pro_with_pe',()=>{})
+broker.authenticate('clientid','username','password',()=>{})
 broker.on('ready', ()=>{
     console.log('mqtt server is opened')
     console.log(url+':'+port.toString())
