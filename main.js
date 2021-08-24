@@ -31,7 +31,7 @@ client.on('connect', ()=>{
                client.publish(topic,0)
                process.exit()
             }
-        }
+        })
         // battery_level+=20
         console.log(battery_level)
     }, 5000)
