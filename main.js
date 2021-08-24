@@ -15,19 +15,22 @@ password: 'password'
 // client connection
 var client = mqtt.connect('mqtt://'+host+':'+port, settings);
 var topic = 'Charger'
-var battery_level=0
+var battery_level=0,battery_status=''
 if (typeof (process.argv.slice(2)[0])!='undefined'){
     var battery_target=Number(process.argv.slice(2)[0])
 }else{
-    var battery_target=100
+    var battery_target=101
 }
 
 client.on('connect', ()=>{
     setInterval(()=>{
-        exec('termux-battery-status',(err,out,der)=>battery_level=Number(JSON.parse(out).percentage))
-        if (battery_level>=battery_target){
-            client.publish(topic,0)
-            process.exit()
+        exec('termux-battery-status',(err,out,der)=>{
+            battery_level=JSON.parse(out).percentage
+            battery_status=JSON.parse(out).status
+            if (battery_level>=battery_target||battery_status=="FULL"){
+               client.publish(topic,0)
+               process.exit()
+            }
         }
         // battery_level+=20
         console.log(battery_level)
