@@ -16,11 +16,11 @@ password: 'password'
 var client = mqtt.connect('mqtt://'+host+':'+port, settings);
 var topic = 'Charger'
 var battery_level=0,battery_status=''
-if (typeof (process.argv.slice(2)[0])!='undefined'){
-    var battery_target=Number(process.argv.slice(2)[0])
-}else{
-    var battery_target=101
-}
+var battery_target
+if (typeof (process.argv.slice(2)[0])!='undefined')
+    battery_target=Number(process.argv.slice(2)[0])
+else
+    battery_target=101
 
 client.on('connect', ()=>{
     setInterval(()=>{
@@ -32,7 +32,6 @@ client.on('connect', ()=>{
                process.exit()
             }
         })
-        // battery_level+=20
         console.log(battery_level)
     }, 5000)
 })
