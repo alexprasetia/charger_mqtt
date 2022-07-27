@@ -1,12 +1,11 @@
 var mosca = require('mosca')
 var exec = require('child_process').exec
 var url = require("ip").address();
-if (process.platform =='win32'||process.platform=='win64'){
-    var command_shutdown= 'shutdown /s' 
-}
-else{ 
-    var command_shutdown= 'shutdown +2' 
-}
+var command_shutdown;
+if (process.platform =='win32'||process.platform=='win64')
+    command_shutdown= 'shutdown /s' 
+else
+    command_shutdown= 'shutdown +2' 
 // var port = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000)
 var port = 2930
 var settings = {url:url,port: port}
